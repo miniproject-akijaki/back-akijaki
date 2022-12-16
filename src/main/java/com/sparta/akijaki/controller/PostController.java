@@ -1,2 +1,4 @@
-package com.sparta.akijaki.controller;public class PostController {
+package com.sparta.akijaki.controller;
+
+public class PostController {
 }
