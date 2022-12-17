@@ -28,5 +28,8 @@ out/
 /nbdist/
 /.nb-gradle/
 
+### application-security.properties ###
+application-security.properties
+
 ### VS Code ###
 .vscode/

@@ -18,6 +18,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     private static final SecurityExceptionDto exceptionDto =
             new SecurityExceptionDto("인증에 실패하였습니다.", HttpStatus.UNAUTHORIZED.value());
 
+    public CustomAuthenticationEntryPoint(ObjectMapper om) {
+    }
+
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,

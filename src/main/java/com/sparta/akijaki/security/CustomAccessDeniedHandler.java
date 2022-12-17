@@ -17,6 +17,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     private static final SecurityExceptionDto exceptionDto =
             new SecurityExceptionDto("접근 권한이 없습니다.", HttpStatus.FORBIDDEN.value());
 
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException{
