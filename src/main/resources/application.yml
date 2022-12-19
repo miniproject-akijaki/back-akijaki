@@ -6,11 +6,29 @@
 #        password:
 #          driver-class-name:
 
+  spring:
+    profiles:
+      include : security
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate :
+      ddl-auto : update
+    show_sql : true
+
+  # Swagger
+  mvc:
+    pathmatch:
+      matching-strategy : ANT_PATH_MATCHER
+
 cloud:
   aws:
     credentials:
       #aws access-key
-      access-key: AKIA432PI3EKOJY56CWI
+      access-key : AKIA432PI3EKOJY56CWI
       #aws secret-key
       secret-key: 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
       #aws region()
