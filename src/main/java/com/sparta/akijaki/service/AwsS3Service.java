@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AwsS3Service {
 
-    @Value("akijaki-s3-bucket")
+    @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
     private  final AmazonS3 amazonS3;
@@ -54,7 +54,6 @@ public class AwsS3Service {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 
-    //이미지 파일명 중복 방지
     private String createFileName(String fileName) { // 먼저 파일 업로드 시, 파일명을 난수화하기 위해 random으로 돌립니다.
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
     }
