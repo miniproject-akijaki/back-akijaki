@@ -48,7 +48,7 @@ public class UserService {
             role = UserRoleEnum.ADMIN;
         }
 
-        User user = new User(username, password, role);
+        User user = new User(username, password, requestDto.getNickname(),role);
         userRepository.save(user);
 
         return new CompleteResponseDto("회원가입 성공");
