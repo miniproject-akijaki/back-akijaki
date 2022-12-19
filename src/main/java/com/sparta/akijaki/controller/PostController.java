@@ -19,6 +19,7 @@ public class PostController {
 
     private final PostService postService;
 
+
     // 전체 게시글 조회
     @GetMapping("/post")
     @ApiOperation(value = "전체 게시글 조회")

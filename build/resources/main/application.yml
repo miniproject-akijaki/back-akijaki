@@ -1,0 +1,30 @@
+#spring:
+#  datasource:
+#    #설치된 Mysql DB와 연결 URL
+#    url:
+#      username:
+#        password:
+#          driver-class-name:
+
+#cloud:
+#  aws:
+#    credentials:
+#      #aws access-key
+#      access-key: ${s3.accesskey}
+#      #aws secret-key
+#      secret-key: ${s3.secretkey}
+#      #aws region()
+#    region:
+#      static: ${s3.resion}
+#      #bucket 이름
+#    s3:
+#      bucket: ${s3.bucket}
+#    stack:
+#      auto: false
+#
+#spring:
+#  servlet:
+#    multipart:
+#      #기본값은 1MB, 사진 용량에 맞춰서 변경 가능
+#      max-file-size: 10MB
+#      max-request-size: 10MB

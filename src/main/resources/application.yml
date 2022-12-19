@@ -10,15 +10,15 @@ cloud:
   aws:
     credentials:
       #aws access-key
-      access-key: ${s3.accesskey}
+      access-key: AKIA432PI3EKOJY56CWI
       #aws secret-key
-      secret-key: ${s3.secretkey}
+      secret-key: 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
       #aws region()
     region:
-      static: ${s3.resion}
+      static: ap-northeast-2
       #bucket 이름
     s3:
-      bucket: ${s3.bucket}
+      bucket: akijaki-s3-bucket
     stack:
       auto: false
 

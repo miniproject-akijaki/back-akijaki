@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AwsS3Service {
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("akijaki-s3-bucket")
     private String bucket;
 
     private  final AmazonS3 amazonS3;
@@ -49,6 +49,7 @@ public class AwsS3Service {
         return  fileNameList;
     }
 
+    //delete image를 deleteFile로 바꿈
     public void deleteFile(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
