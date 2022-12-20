@@ -28,15 +28,15 @@ public class CommentController {
         return commentService.saveComment(postId, commentRequsetDto, httpServletRequest);
     }
     //댓글 수정
-    @PutMapping("/{postId}/{commentId}")
+    @PutMapping("/{commentId}")
     @ApiOperation(value = "댓글 수정")
-    public CommentResponseDto updateComment(@PathVariable Long postId, @PathVariable Long commentId, @Valid @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
-        return commentService.updateComment(postId, commentId, commentRequestDto, httpServletRequest);
+    public CommentResponseDto updateComment(@PathVariable Long commentId, @Valid @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
+        return commentService.updateComment(commentId, commentRequestDto, httpServletRequest);
     }
     //댓글 삭제
-    @DeleteMapping("/{postId}/{commentId}")
+    @DeleteMapping("/{commentId}")
     @ApiOperation(value = "댓글 삭제")
-    public CompleteResponseDto deleteComment(@PathVariable Long postId, @PathVariable Long commentId, HttpServletRequest httpServletRequest) {
-        return commentService.deleteComment(postId, commentId, httpServletRequest);
+    public CompleteResponseDto deleteComment(@PathVariable Long commentId, HttpServletRequest httpServletRequest) {
+        return commentService.deleteComment(commentId, httpServletRequest);
     }
 }

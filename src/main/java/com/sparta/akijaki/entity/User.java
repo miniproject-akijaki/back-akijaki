@@ -34,6 +34,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @Column(nullable = false)
+    private boolean userStatus=false;
+
     public User(String username, String password, String nickname, UserRoleEnum role) {
         this.username = username;
         this.password = password;

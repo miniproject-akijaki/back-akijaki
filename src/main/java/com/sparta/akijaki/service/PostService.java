@@ -68,7 +68,7 @@ public class PostService {
     @Transactional
     public PostCreateResponseDto createPost(PostRequestDto requestDto, HttpServletRequest request) {
         User user = userUtil.getUserInfo(request);
-        Post post = new Post(requestDto, user);
+        Post post = new Post(requestDto.getTitle(),requestDto.getContent(),requestDto.getPrice(), user);
 
         postRepository.save(post); // 자동으로 쿼리가 생성되면서 데이터베이스에 연결되며 저장된다.
 
@@ -83,17 +83,12 @@ public class PostService {
         UserRoleEnum userRoleEnum = user.getRole();
         Long postLikeCnt = postLikesRepository.countByPostAndLikeCheckIsTrue(post);
 
-        // 사용자 권한이 User일 경우
-        if(userRoleEnum == UserRoleEnum.USER) {
-            if(post.getUser().getUsername().equals(user.getUsername())) {
-                post.update(requestDto);
-                postRepository.save(post);
-            } else {
-                throw new IllegalArgumentException("포스트 작성자가 아니라서 삭제할 수 없습니다.");
-            }
-        } else {
-            post.update(requestDto);
+        // 게시글 작성자이거나 관리자인 경우
+        if(post.getUser().getUsername().equals(user.getUsername()) || userRoleEnum.equals(UserRoleEnum.ADMIN)) {
+            post.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getPrice());
             postRepository.save(post);
+        } else {
+            throw new IllegalArgumentException("포스트 작성자가 아니라서 수정할 수 없습니다.");
         }
         return new PostUpdateResponseDto(post, postLikeCnt);
     }
@@ -105,19 +100,12 @@ public class PostService {
         User user = userUtil.getUserInfo(request);
         UserRoleEnum userRoleEnum = user.getRole();
 
-        // 사용자 권한이 User일 경우
-        if(userRoleEnum == UserRoleEnum.USER) {
-            if(post.getUser().getUsername().equals(user.getUsername())) {
-//                deletePostByPostId(id);
+        // 게시글 작성자이거나 관리자인 경우
+        if(post.getUser().getUsername().equals(user.getUsername()) || userRoleEnum.equals(UserRoleEnum.ADMIN)) {
                 postRepository.delete(post);
             } else {
                 throw new IllegalArgumentException("포스트 작성자가 아니라서 삭제할 수 없습니다.");
             }
-        } else {
-//            deletePostByPostId(id);
-            postRepository.delete(post);
-        }
-
         return new CompleteResponseDto("포스트 삭제 성공");
     }
 

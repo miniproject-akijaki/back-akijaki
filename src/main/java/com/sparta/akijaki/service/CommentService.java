@@ -46,13 +46,9 @@ public class CommentService {
         return new CommentResponseDto(comment);
     }
     @Transactional
-    public CommentResponseDto updateComment(Long postId, Long commentId, CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest) {
+    public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest) {
         //로그인 여부 확인
         User user = userUtil.getUserInfo(httpServletRequest);
-        //게시글 존재 여부 확인
-        if(!postRepository.existsById(postId)){
-            throw new IllegalArgumentException("게시글이 존재하지 않습니다");
-        }
         //댓글 존재 여부 확인
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new IllegalArgumentException(("댓글이 존재하지 않습니다")
@@ -69,13 +65,9 @@ public class CommentService {
     }
     @Transactional
     //댓글 삭제하기
-    public CompleteResponseDto deleteComment(Long postId, Long commentId, HttpServletRequest httpServletRequest) {
+    public CompleteResponseDto deleteComment(Long commentId, HttpServletRequest httpServletRequest) {
         //로그인 여부 확인
         User user = userUtil.getUserInfo(httpServletRequest);
-        //게시글 저장 여부 확인
-        if(!postRepository.existsById(postId)){
-            throw new IllegalArgumentException("게시글이 존재하지 않습니다");
-        }
         //댓글 저장 여부 확인
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new IllegalArgumentException(("댓글이 존재하지 않습니다")

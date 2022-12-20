@@ -18,12 +18,15 @@ public class Post extends Timestamped{
     private Long id;
 
     // 제목
-    @Column(nullable = false, columnDefinition = "VARCHAR(50)")
+    @Column(nullable = false)
     private String title;
 
     // 내용
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+
+    @Column
+    private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,14 +38,16 @@ public class Post extends Timestamped{
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // , cascade = CascadeType.REMOVE
     private List<PostLikes> postLikes = new ArrayList<>();
 
-    public Post(PostRequestDto postRequestDto, User user) {  // RequestDto에 의존하기보다 필드로 받아주는 것이 좋다.
-        this.title = postRequestDto.getTitle();
-        this.content = postRequestDto.getContent();
+    public Post(String title,String content, int price, User user) {  // RequestDto에 의존하기보다 필드로 받아주는 것이 좋다.
+        this.title = title;
+        this.content = content;
+        this.price = price;
         this.user = user;
     }
 
-    public void update(PostRequestDto postRequestDto) {
-        this.title = postRequestDto.getTitle();
-        this.content = postRequestDto.getContent();
+    public void update(String title,String content, int price) {
+        this.title = title;
+        this.content = content;
+        this.price = price;
     }
 }

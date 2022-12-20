@@ -13,6 +13,8 @@ public class PostRequestDto {
     private String title;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
+    private int price;
+
     private LocalDateTime registeredAt;
     private LocalDateTime unRegisteredAt;
 }
