@@ -21,6 +21,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+application.yml
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -31,8 +32,6 @@ out/
 ### application-security.properties ###
 application-security.properties
 
-### application.yml ###
-application.yml
 
 
 ### VS Code ###
