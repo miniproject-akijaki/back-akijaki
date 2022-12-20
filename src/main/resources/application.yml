@@ -1,3 +1,14 @@
+#spring.profiles.include=security
+#
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.show_sql = true
+#
+## Swagger
+#spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
+
+
 #spring:
 #  datasource:
 #    #설치된 Mysql DB와 연결 URL
@@ -6,23 +17,23 @@
 #        password:
 #          driver-class-name:
 
-  spring:
+spring:
     profiles:
       include : security
-
-
-  datasource:
+    datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
+    url: jdbc:mysql://akijaki-database.ctbgnkpocaur.ap-northeast-2.rds.amazonaws.com/akijaki
+    username: admin
+    password: akijaki1
+jpa:
     hibernate :
       ddl-auto : update
     show_sql : true
 
   # Swagger
-  mvc:
-    pathmatch:
-      matching-strategy : ANT_PATH_MATCHER
+    mvc:
+      pathmatch:
+        matching-strategy : ANT_PATH_MATCHER
 
 cloud:
   aws:
@@ -40,9 +51,9 @@ cloud:
     stack:
       auto: false
 
-spring:
-  servlet:
-    multipart:
-      #기본값은 1MB, 사진 용량에 맞춰서 변경 가능
-      max-file-size: 10MB
-      max-request-size: 10MB
+  spring:
+    servlet:
+      multipart:
+        #기본값은 1MB, 사진 용량에 맞춰서 변경 가능
+        max-file-size: 10MB
+        max-request-size: 10MB

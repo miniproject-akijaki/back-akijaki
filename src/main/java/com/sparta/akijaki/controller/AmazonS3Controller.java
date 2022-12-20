@@ -39,5 +39,4 @@ public class AmazonS3Controller {
         awsS3Service.deleteFile(fileName);
 
     }
-
 }
