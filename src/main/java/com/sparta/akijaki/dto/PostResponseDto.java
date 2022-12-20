@@ -11,6 +11,7 @@ import java.util.List;
 public class PostResponseDto {
     private Long num;
     private String username;
+    private String nickname;
     private String content;
     private String title;
     private LocalDateTime modifiedAt;
@@ -22,6 +23,7 @@ public class PostResponseDto {
     public PostResponseDto(Post post) {
         this.num = post.getId();
         this.username = post.getUser().getUsername();
+        this.nickname = post.getUser().getNickname();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
@@ -31,6 +33,7 @@ public class PostResponseDto {
     public PostResponseDto(Post post, CommentListResponseDto commentList, Long postLikeCnt) {
         this.num = post.getId();
         this.username = post.getUser().getUsername();
+        this.nickname = post.getUser().getNickname();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();

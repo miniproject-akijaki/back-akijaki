@@ -78,6 +78,6 @@ public class UserService {
         httpServletResponse.addHeader(
                 JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(authentication));
 
-        return new CompleteResponseDto("로그인 성공");
+        return new CompleteResponseDto(user.getNickname()+"님 환영합니다");
     }
 }
