@@ -13,8 +13,10 @@ public class PostResponseDto {
     private String username;
     private String content;
     private String title;
+
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
+
     private Long likeCount=0l;
 
     private List<CommentResponseDto> commentList = new ArrayList<>();

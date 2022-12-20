@@ -4,7 +4,9 @@ import com.sparta.akijaki.entity.User;
 import com.sparta.akijaki.jwt.JwtUtil;
 import com.sparta.akijaki.repository.UserRepository;
 import io.jsonwebtoken.Claims;
+
 import javax.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,4 +33,6 @@ public class UserUtil {
             throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
         }
     }
+
 }
+

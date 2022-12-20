@@ -21,6 +21,8 @@ public class Post extends Timestamped{
     @Column(nullable = false, columnDefinition = "VARCHAR(50)")
     private String title;
 
+    @Column
+    private String image;
     // 내용
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -44,5 +46,9 @@ public class Post extends Timestamped{
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
