@@ -34,8 +34,9 @@ public class UserService {
     public CompleteResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
-
+        System.out.println("username = " + username);
         boolean isExistUsername = userRepository.existsByUsername(username);
+        System.out.println("isExistUsername = " + isExistUsername);
         if (isExistUsername) {
             throw new IllegalArgumentException("중복된 username 입니다.");
         }

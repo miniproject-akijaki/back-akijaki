@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -13,10 +15,15 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    private final ObjectMapper om;
 
     private static final SecurityExceptionDto exceptionDto =
             new SecurityExceptionDto("인증에 실패하였습니다.", HttpStatus.UNAUTHORIZED.value());
+
+
 
     @Override
     public void commence(HttpServletRequest request,

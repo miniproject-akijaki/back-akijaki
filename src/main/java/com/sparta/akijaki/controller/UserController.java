@@ -9,18 +9,15 @@ import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @Api(tags = {"User API"})
 @RestController
+//@CrossOrigin(originPatterns = "http://localhost:3000")
 public class UserController {
     private final UserService userService;
-
 
     @PostMapping("/signup")
     @ApiOperation(value = "회원가입")
