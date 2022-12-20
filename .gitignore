@@ -34,5 +34,6 @@ application-security.properties
 ### application.yml ###
 application.yml
 
+
 ### VS Code ###
 .vscode/
