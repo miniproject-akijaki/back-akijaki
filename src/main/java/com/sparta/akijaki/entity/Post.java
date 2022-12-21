@@ -1,11 +1,10 @@
 package com.sparta.akijaki.entity;
 
-import com.sparta.akijaki.dto.PostRequestDto;
-
-import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
