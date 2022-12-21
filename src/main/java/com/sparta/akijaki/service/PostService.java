@@ -71,7 +71,7 @@ public class PostService {
     public PostCreateResponseDto createPost(PostRequestDto requestDto, HttpServletRequest request) {
         User user = userUtil.getUserInfo(request);
         Post post = new Post(requestDto, user);
-//        post.setImage();
+//       post.setImage();
         postRepository.save(post); // 자동으로 쿼리가 생성되면서 데이터베이스에 연결되며 저장된다.
 
         return new PostCreateResponseDto(post);
