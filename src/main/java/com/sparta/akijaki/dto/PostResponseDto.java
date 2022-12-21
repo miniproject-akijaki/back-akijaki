@@ -16,8 +16,10 @@ public class PostResponseDto {
     private String title;
 
     private int price;
+
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
+
     private Long likeCount=0l;
 
     private List<CommentResponseDto> commentList = new ArrayList<>();

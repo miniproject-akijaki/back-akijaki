@@ -5,7 +5,9 @@ import com.sparta.akijaki.entity.User;
 import com.sparta.akijaki.jwt.JwtUtil;
 import com.sparta.akijaki.repository.UserRepository;
 import io.jsonwebtoken.Claims;
+
 import javax.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,7 @@ public class UserUtil {
         }
     }
 
+
     public boolean checkUserStatus(String username){
         User user = userRepository.findByUsername(username).orElseThrow(
                 ()-> new IllegalArgumentException("회원가입이 필요합니다")
@@ -43,3 +46,4 @@ public class UserUtil {
         return true;
     }
 }
+

@@ -1,7 +1,6 @@
 package com.sparta.akijaki.repository;
 
 import com.sparta.akijaki.entity.User;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

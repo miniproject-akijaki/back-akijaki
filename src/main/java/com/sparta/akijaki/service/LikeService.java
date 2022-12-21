@@ -2,8 +2,10 @@ package com.sparta.akijaki.service;
 
 import com.sparta.akijaki.dto.CompleteResponseDto;
 import com.sparta.akijaki.entity.*;
-import com.sparta.akijaki.jwt.JwtUtil;
-import com.sparta.akijaki.repository.*;
+import com.sparta.akijaki.repository.CommentLikesRepository;
+import com.sparta.akijaki.repository.CommentRepository;
+import com.sparta.akijaki.repository.PostLikesRepository;
+import com.sparta.akijaki.repository.PostRepository;
 import com.sparta.akijaki.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

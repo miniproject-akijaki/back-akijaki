@@ -21,6 +21,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+application-security.properties
+application.properties
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -28,8 +30,7 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### application-security.properties ###
-application-security.properties
+
 
 ### VS Code ###
 .vscode/

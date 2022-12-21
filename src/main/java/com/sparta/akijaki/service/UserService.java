@@ -1,13 +1,11 @@
 package com.sparta.akijaki.service;
 
 import com.sparta.akijaki.dto.*;
-
 import com.sparta.akijaki.dto.SignupRequestDto;
 import com.sparta.akijaki.entity.User;
 import com.sparta.akijaki.entity.UserRoleEnum;
 import com.sparta.akijaki.jwt.JwtUtil;
 import com.sparta.akijaki.repository.UserRepository;
-import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +49,7 @@ public class UserService {
         }
 
         User user = new User(username, password, requestDto.getNickname(),role);
+
         userRepository.save(user);
 
         return new CompleteResponseDto("회원가입 성공");

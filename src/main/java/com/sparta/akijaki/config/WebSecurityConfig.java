@@ -50,6 +50,7 @@ public class WebSecurityConfig{
 
                 .antMatchers("/", "/api/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/post/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/s3/file").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
 
                 .antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()

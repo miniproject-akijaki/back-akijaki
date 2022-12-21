@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+   @Column(nullable = false)
     private String nickname;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(20)")
@@ -38,6 +38,7 @@ public class User {
 
     @Column(nullable = false)
     private boolean userStatus;
+
 
     public User(String username, String password, String nickname, UserRoleEnum role) {
         this.username = username;

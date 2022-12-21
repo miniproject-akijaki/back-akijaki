@@ -21,6 +21,8 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String title;
 
+    @Column
+    private String image;
     // 내용
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -49,5 +51,9 @@ public class Post extends Timestamped{
         this.title = title;
         this.content = content;
         this.price = price;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
