@@ -70,9 +70,9 @@ public class PostService {
     @Transactional
     public PostCreateResponseDto createPost(PostRequestDto requestDto, HttpServletRequest request) {
         User user = userUtil.getUserInfo(request);
-
+        List<String> imageList = awsS3Service.uploadFile(requestDto.getMultipartFiles());
         Post post = new Post(requestDto.getTitle(),requestDto.getContent(),requestDto.getPrice(), user);
-
+        post.setImage(imageList.get(0));
 
         postRepository.save(post); // 자동으로 쿼리가 생성되면서 데이터베이스에 연결되며 저장된다.
 

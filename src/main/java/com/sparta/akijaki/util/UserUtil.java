@@ -34,7 +34,7 @@ public class UserUtil {
             throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
         }
     }
-    
+
 
     public boolean checkUserStatus(String username){
         User user = userRepository.findByUsername(username).orElseThrow(
