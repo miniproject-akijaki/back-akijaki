@@ -10,6 +10,7 @@ public class PostCreateResponseDto {
     private String username;
     private String content;
     private String title;
+    private int price;
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
 
@@ -17,6 +18,7 @@ public class PostCreateResponseDto {
         this.num = post.getId();
         this.username = post.getUser().getUsername();
         this.title = post.getTitle();
+        this.price = post.getPrice();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();

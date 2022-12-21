@@ -12,4 +12,9 @@ public class CompleteResponseDto {
         this.msg = msg;
         this.statusCode = HttpStatus.OK.value();
     }
+
+    public CompleteResponseDto(String msg, int statusCode) {
+        this.msg = msg;
+        this.statusCode = statusCode;
+    }
 }

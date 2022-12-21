@@ -1,5 +1,6 @@
 package com.sparta.akijaki.jwt;
 
+import com.sparta.akijaki.repository.UserRepository;
 import com.sparta.akijaki.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -42,6 +43,8 @@ public class JwtUtil {
     private Key key;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+    private final UserRepository userRepository;
 
     @PostConstruct
     public void init() {

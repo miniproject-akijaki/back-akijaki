@@ -13,6 +13,7 @@ public class PostShowResponseDto {
     private String username;
     private String content;
     private String title;
+    private int price;
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
     private Long likeCount;
@@ -22,6 +23,7 @@ public class PostShowResponseDto {
         this.num = post.getId();
         this.title = post.getTitle();
         this.username = post.getUser().getUsername();
+        this.price = post.getPrice();
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
@@ -32,6 +34,7 @@ public class PostShowResponseDto {
         this.username = post.getUser().getUsername();
         this.title = post.getTitle();
         this.content = post.getContent();
+        this.price = post.getPrice();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
         this.likeCount = postLikeCnt;

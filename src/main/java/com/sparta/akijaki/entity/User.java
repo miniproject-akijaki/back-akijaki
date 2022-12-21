@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.AssertTrue;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,10 +36,19 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @Column(nullable = false)
+    private boolean userStatus;
+
+
     public User(String username, String password, String nickname, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.role = role;
+        userStatus = true;
+    }
+
+    public void setUserStatus(boolean userStatus){
+        this.userStatus = userStatus;
     }
 }

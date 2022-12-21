@@ -19,13 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 public class LikeController {
     private final LikeService likeService;
 
-    @PostMapping("/post/{postId}/like")
+    @PostMapping("/post/like/{postId}")
     @ApiOperation(value = "게시글 좋아요")
     public CompleteResponseDto likePost(@PathVariable Long postId, HttpServletRequest request) {
         return likeService.likePost(postId, request);
     }
 
-    @PostMapping ("/comment/{commentId}/like")
+    @PostMapping ("/comment/like/{commentId}")
     @ApiOperation(value = "댓글 좋아요")
     public CompleteResponseDto likeComment(@PathVariable Long commentId, HttpServletRequest request) {
         return likeService.likeComment(commentId, request);
