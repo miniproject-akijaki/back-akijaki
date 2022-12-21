@@ -1,9 +1,7 @@
 package com.sparta.akijaki.service;
 
-import com.sparta.akijaki.dto.SignupRequestDto;
+import com.sparta.akijaki.dto.*;
 
-import com.sparta.akijaki.dto.CompleteResponseDto;
-import com.sparta.akijaki.dto.LoginRequestDto;
 import com.sparta.akijaki.dto.SignupRequestDto;
 import com.sparta.akijaki.entity.User;
 import com.sparta.akijaki.entity.UserRoleEnum;
@@ -30,6 +28,7 @@ public class UserService {
     @Value("${admin.secret.token}")
     private String admin_token;
 
+    //회원가입
     @Transactional
     public CompleteResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
@@ -55,6 +54,7 @@ public class UserService {
         return new CompleteResponseDto("회원가입 성공");
     }
 
+    //로그인
     @Transactional(readOnly = true)
     public CompleteResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse httpServletResponse) {
         //사용자 확인
@@ -78,6 +78,21 @@ public class UserService {
         httpServletResponse.addHeader(
                 JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(authentication));
 
-        return new CompleteResponseDto(user.getNickname()+"님 환영합니다");
+        return new CompleteResponseDto(user.getNickname()+"님 환영합니다!");
+    }
+
+    //회원탈퇴
+    @Transactional
+    public CompleteResponseDto withdrawal(WithdrawalRequestDto withdrawalRequestDto, HttpServletResponse response) {
+        //사용자 확인
+        User user = userRepository.findByUsername(withdrawalRequestDto.getUsername()).orElseThrow(
+                () -> new IllegalArgumentException("회원을 찾을 수 없습니다.")
+        );
+        //비밀번호 확인
+        if(!passwordEncoder.matches(withdrawalRequestDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+        user.setUserStatus(!user.isUserStatus());
+        return new CompleteResponseDto("회원탈퇴를 완료했습니다");
     }
 }

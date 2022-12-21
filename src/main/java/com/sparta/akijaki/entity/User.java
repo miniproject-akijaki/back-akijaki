@@ -37,13 +37,17 @@ public class User {
     private UserRoleEnum role;
 
     @Column(nullable = false)
-    @AssertTrue
-    private boolean userStatus=true;
+    private boolean userStatus;
 
     public User(String username, String password, String nickname, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.role = role;
+        userStatus = true;
+    }
+
+    public void setUserStatus(boolean userStatus){
+        this.userStatus = userStatus;
     }
 }

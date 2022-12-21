@@ -23,9 +23,9 @@ public class CommentController {
     //댓글 생성
     @PostMapping("/{postId}")
     @ApiOperation(value = "댓글 작성")
-    public CommentResponseDto saveComment(@PathVariable Long postId, @Valid @RequestBody CommentRequestDto commentRequsetDto, HttpServletRequest httpServletRequest){
+    public CommentResponseDto saveComment(@PathVariable Long postId, @Valid @RequestBody CommentRequestDto commentRequestDto, HttpServletRequest httpServletRequest){
 
-        return commentService.saveComment(postId, commentRequsetDto, httpServletRequest);
+        return commentService.saveComment(postId, commentRequestDto, httpServletRequest);
     }
     //댓글 수정
     @PutMapping("/{commentId}")

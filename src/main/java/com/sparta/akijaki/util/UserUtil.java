@@ -1,5 +1,6 @@
 package com.sparta.akijaki.util;
 
+import com.sparta.akijaki.dto.CompleteResponseDto;
 import com.sparta.akijaki.entity.User;
 import com.sparta.akijaki.jwt.JwtUtil;
 import com.sparta.akijaki.repository.UserRepository;
@@ -30,5 +31,15 @@ public class UserUtil {
         } else {
             throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
         }
+    }
+
+    public boolean checkUserStatus(String username){
+        User user = userRepository.findByUsername(username).orElseThrow(
+                ()-> new IllegalArgumentException("회원가입이 필요합니다")
+        );
+        if(!user.isUserStatus()){
+            return user.isUserStatus();
+        }
+        return true;
     }
 }

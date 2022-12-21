@@ -14,6 +14,8 @@ public class PostResponseDto {
     private String nickname;
     private String content;
     private String title;
+
+    private int price;
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
     private Long likeCount=0l;
@@ -26,6 +28,7 @@ public class PostResponseDto {
         this.nickname = post.getUser().getNickname();
         this.title = post.getTitle();
         this.content = post.getContent();
+        this.price = post.getPrice();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
     }
@@ -36,6 +39,7 @@ public class PostResponseDto {
         this.nickname = post.getUser().getNickname();
         this.title = post.getTitle();
         this.content = post.getContent();
+        this.price = post.getPrice();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
         this.likeCount = postLikeCnt;
