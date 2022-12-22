@@ -1,6 +1,7 @@
 package com.sparta.akijaki.service;
 
 import com.sparta.akijaki.dto.CompleteResponseDto;
+import com.sparta.akijaki.dto.LikeResponseDto;
 import com.sparta.akijaki.entity.*;
 import com.sparta.akijaki.repository.CommentLikesRepository;
 import com.sparta.akijaki.repository.CommentRepository;
@@ -25,46 +26,46 @@ public class LikeService {
 
 
     @Transactional
-    public CompleteResponseDto likePost(Long postId, HttpServletRequest request) {
+    public LikeResponseDto likePost(Long postId, HttpServletRequest request) {
         Post post = checkPost(postId);
         User user = userUtil.getUserInfo(request);
 
         PostLikes postLikes = postLikesRepository.findByUserAndPost(user, post).orElse(null);
-        if (postLikes != null && postLikes.isLikeCheck()==true) {
+        if (postLikes != null && postLikes.isLikeCheck()) {
             //기존에 회원이 좋아요를 눌렀던 경우 좋아요 취소
             postLikes.likeCancle();
-            return new CompleteResponseDto("좋아요 취소!");
+            return new LikeResponseDto("좋아요 취소!", false);
         } else if (postLikes != null) {
             //기존에 회원이 좋아요를 눌러서 데이터베이스에 있으나 좋아요 취소 됐던 케이스는 다시 좋아요
             postLikes.likepost();
-            return new CompleteResponseDto("좋아요!");
+            return new LikeResponseDto("좋아요!", true);
         } else {
             //좋아요를 처음 누르는 케이스이므로 데이터베이스에 정보 저장
             PostLikes addPostLike = new PostLikes(user, post);
             postLikesRepository.save(addPostLike);
-            return new CompleteResponseDto("좋아요!");
+            return new LikeResponseDto("좋아요!", true);
         }
     }
 
     @Transactional
-    public CompleteResponseDto likeComment(Long commentId, HttpServletRequest request) {
+    public LikeResponseDto likeComment(Long commentId, HttpServletRequest request) {
         Comment comment = checkComment(commentId);
         User user = userUtil.getUserInfo(request);
 
         CommentLikes commentLikes = commentLikesRepository.findByUserAndComment(user, comment).orElse(null);
-        if (commentLikes != null && commentLikes.isLikeCheck()==true) {
+        if (commentLikes != null && commentLikes.isLikeCheck()) {
             //기존에 회원이 좋아요를 눌렀던 경우 좋아요 취소
             commentLikes.likeCancle();
-            return new CompleteResponseDto("좋아요 취소!");
+            return new LikeResponseDto("좋아요 취소!", false);
         } else if (commentLikes != null) {
             //기존에 회원이 좋아요를 눌러서 데이터베이스에 있으나 좋아요 취소 됐던 케이스는 다시 좋아요
             commentLikes.likeComment();
-            return new CompleteResponseDto("좋아요!");
+            return new LikeResponseDto("좋아요!", true);
         } else {
             //좋아요를 처음 누르는 케이스이므로 데이터베이스에 정보 저장
             CommentLikes addCommentLike = new CommentLikes(user, comment);
             commentLikesRepository.save(addCommentLike);
-            return new CompleteResponseDto("좋아요!");
+            return new LikeResponseDto("좋아요!", true);
         }
     }
 

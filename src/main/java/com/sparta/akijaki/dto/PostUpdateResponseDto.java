@@ -14,6 +14,7 @@ public class PostUpdateResponseDto {
     private int price;
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
+    private String imageUrl;
     private Long likeCount;
 
     public PostUpdateResponseDto(Post post, Long postLikeCnt) {
@@ -24,6 +25,7 @@ public class PostUpdateResponseDto {
         this.price = post.getPrice();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+        this.imageUrl = post.getImageUrl();
         this.likeCount = postLikeCnt;
     }
 }

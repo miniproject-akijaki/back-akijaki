@@ -10,6 +10,7 @@ import com.sparta.akijaki.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,6 +24,7 @@ public class PostService {
     private final PostLikesRepository postLikesRepository;
     private final CommentLikesRepository commentLikesRepository;
     private final UserUtil userUtil;
+    private final AwsS3Service awsS3Service;
 
 
     // 전체 포스트 가져오기
@@ -87,7 +89,7 @@ public class PostService {
 
     // 포스트 수정
     @Transactional
-    public PostUpdateResponseDto updatePost(Long id, PostRequestDto requestDto, HttpServletRequest request) {
+    public PostUpdateResponseDto updatePost(Long id, String title, String content, int price, String imageUrl, HttpServletRequest request) {
         Post post = checkPost(id);
         User user = userUtil.getUserInfo(request);
         UserRoleEnum userRoleEnum = user.getRole();
@@ -95,7 +97,8 @@ public class PostService {
 
         // 게시글 작성자이거나 관리자인 경우
         if(post.getUser().getUsername().equals(user.getUsername()) || userRoleEnum.equals(UserRoleEnum.ADMIN)) {
-            post.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getPrice());
+//            awsS3Service.deleteFile(post.getImageUrl().replace("https://akijaki-s3-bucket.s3.ap-northeast-2.amazonaws.com/",""));
+            post.update(title, content, price, imageUrl);
             postRepository.save(post);
         } else {
             throw new IllegalArgumentException("포스트 작성자가 아니라서 수정할 수 없습니다.");

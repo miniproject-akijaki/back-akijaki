@@ -43,7 +43,8 @@ public class PostController {
     @PostMapping("/post")
     @ApiOperation(value = "게시글 작성")
     public PostCreateResponseDto createPost(@RequestParam("title") String title, @RequestParam("content") String content,
-                                            @RequestParam("price") int price, @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles, HttpServletRequest request)  {
+                                            @RequestParam("price") int price, @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+                                            HttpServletRequest request)  {
         String imageUrl = awsS3Service.uploadFile(multipartFiles).get(0);
         return postService.createPost(title, content, price, imageUrl, request);
     }
@@ -51,7 +52,7 @@ public class PostController {
 //    @PostMapping("/post")
 //    @ApiOperation(value = "게시글 작성")
 //    public void createPost(@ModelAttribute TestDto testDto, HttpServletRequest request)  {
-//        String imageUrl = awsS3Service.uploadFile(postCreateResponseDto.getFiles()).get(0);
+//        String imageUrl = awsS3Service.uploadFile(testDto.getFiles()).get(0);
 //        System.out.println(testDto.getFiles());
 //        System.out.println(testDto.getTitle());
 //        return postService.createPost();
@@ -60,8 +61,11 @@ public class PostController {
     // 게시글 수정
     @PutMapping("/post/{id}")
     @ApiOperation(value = "게시글 수정")
-    public PostUpdateResponseDto updatePost(@PathVariable Long id, @Valid @RequestBody PostRequestDto requestDto, HttpServletRequest request) {
-        return postService.updatePost(id, requestDto, request);
+    public PostUpdateResponseDto updatePost(@PathVariable Long id ,@RequestParam("title") String title, @RequestParam("content") String content,
+                                            @RequestParam("price") int price, @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+                                            HttpServletRequest request) {
+        String imageUrl = awsS3Service.uploadFile(multipartFiles).get(0);
+        return postService.updatePost(id, title, content, price, imageUrl, request);
     }
 
     // 게시글 삭제

@@ -48,9 +48,10 @@ public class Post extends Timestamped {
         this.user = user;
     }
 
-    public void update(String title, String content, int price) {
+    public void update(String title, String content, int price, String imageUrl) {
         this.title = title;
         this.content = content;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 }

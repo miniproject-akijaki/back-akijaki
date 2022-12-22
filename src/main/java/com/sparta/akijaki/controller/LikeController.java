@@ -1,6 +1,7 @@
 package com.sparta.akijaki.controller;
 
 import com.sparta.akijaki.dto.CompleteResponseDto;
+import com.sparta.akijaki.dto.LikeResponseDto;
 import com.sparta.akijaki.service.LikeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,13 +22,13 @@ public class LikeController {
 
     @PostMapping("/post/like/{postId}")
     @ApiOperation(value = "게시글 좋아요")
-    public CompleteResponseDto likePost(@PathVariable Long postId, HttpServletRequest request) {
+    public LikeResponseDto likePost(@PathVariable Long postId, HttpServletRequest request) {
         return likeService.likePost(postId, request);
     }
 
     @PostMapping ("/comment/like/{commentId}")
     @ApiOperation(value = "댓글 좋아요")
-    public CompleteResponseDto likeComment(@PathVariable Long commentId, HttpServletRequest request) {
+    public LikeResponseDto likeComment(@PathVariable Long commentId, HttpServletRequest request) {
         return likeService.likeComment(commentId, request);
     }
 }
