@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post extends Timestamped{
+public class Post extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +22,7 @@ public class Post extends Timestamped{
     private String title;
 
     @Column
-    private String image;
+    private String imageUrl;
     // 내용
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -40,20 +40,17 @@ public class Post extends Timestamped{
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // , cascade = CascadeType.REMOVE
     private List<PostLikes> postLikes = new ArrayList<>();
 
-    public Post(String title,String content, int price, User user) {  // RequestDto에 의존하기보다 필드로 받아주는 것이 좋다.
+    public Post(String title, String content, int price, String imageUrl, User user) {
         this.title = title;
         this.content = content;
         this.price = price;
+        this.imageUrl = imageUrl;
         this.user = user;
     }
 
-    public void update(String title,String content, int price) {
+    public void update(String title, String content, int price) {
         this.title = title;
         this.content = content;
         this.price = price;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

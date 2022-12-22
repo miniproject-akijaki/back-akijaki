@@ -14,6 +14,7 @@ public class CommentResponseDto {
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
+    private boolean isLikeCheck;
     private Long likeCount=0l;
 
     public CommentResponseDto(Comment comment) {
@@ -24,7 +25,6 @@ public class CommentResponseDto {
         this.createAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
     }
-
     public CommentResponseDto(Comment comment, Long commentLikeCnt) {
         this.num = comment.getId();
         this.username = comment.getUser().getUsername();
@@ -32,6 +32,16 @@ public class CommentResponseDto {
         this.content = comment.getContent();
         this.createAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
+        this.likeCount = commentLikeCnt;
+    }
+    public CommentResponseDto(Comment comment, boolean isLikeCheck,Long commentLikeCnt) {
+        this.num = comment.getId();
+        this.username = comment.getUser().getUsername();
+        this.nickname = comment.getUser().getNickname();
+        this.content = comment.getContent();
+        this.createAt = comment.getCreatedAt();
+        this.modifiedAt = comment.getModifiedAt();
+        this.isLikeCheck = isLikeCheck;
         this.likeCount = commentLikeCnt;
     }
 }

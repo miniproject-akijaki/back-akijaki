@@ -17,6 +17,8 @@ public class PostResponseDto {
 
     private int price;
 
+    private String imageUrl;
+
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
 
@@ -31,6 +33,7 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.price = post.getPrice();
+        this.imageUrl = post.getImageUrl();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
     }
@@ -42,6 +45,7 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.price = post.getPrice();
+        this.imageUrl = post.getImageUrl();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
         this.likeCount = postLikeCnt;

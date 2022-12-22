@@ -1,10 +1,7 @@
 package com.sparta.akijaki.service;
 
 import com.sparta.akijaki.dto.*;
-import com.sparta.akijaki.entity.Comment;
-import com.sparta.akijaki.entity.Post;
-import com.sparta.akijaki.entity.User;
-import com.sparta.akijaki.entity.UserRoleEnum;
+import com.sparta.akijaki.entity.*;
 import com.sparta.akijaki.repository.CommentLikesRepository;
 import com.sparta.akijaki.repository.CommentRepository;
 import com.sparta.akijaki.repository.PostLikesRepository;
@@ -16,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +24,6 @@ public class PostService {
     private final CommentLikesRepository commentLikesRepository;
     private final UserUtil userUtil;
 
-    private final AwsS3Service awsS3Service;
 
     // 전체 포스트 가져오기
     @Transactional(readOnly = true)
@@ -52,28 +49,37 @@ public class PostService {
 
     // 선택 포스트 가져오기
     @Transactional(readOnly = true)
-    public PostShowResponseDto getPost(Long id) {
+    public PostShowResponseDto getPost(Long id, HttpServletRequest httpServletRequest) {
+        User user = userUtil.getUserInfo(httpServletRequest);
         Post post = checkPost(id);
         Long postLikeCnt = postLikesRepository.countByPostAndLikeCheckIsTrue(post);
+
         CommentListResponseDto commentListRequestDto = new CommentListResponseDto();
         List<Comment> comments = commentRepository.findAllByPostIdWithUser(post.getId());
-
+        //선택 포스트에 대한 댓글 가져오기
         for(Comment comment : comments) {
+            //해당 댓글 좋아요 개수 가져오기
             Long commentLikeCnt = commentLikesRepository.countByCommentAndLikeCheckIsTrue(comment);
-            commentListRequestDto.addComment(new CommentResponseDto(comment, commentLikeCnt));
+            //해당 댓글에 대한 유저의 좋아요 여부 확인(눌렀을때 true, 안눌렀을때 false 반환)
+            CommentLikes commentLikes = commentLikesRepository.findByUserAndComment(user, comment).orElse(null);
+            if(commentLikes==null){
+                commentListRequestDto.addComment(new CommentResponseDto(comment, false,commentLikeCnt));
+            }else{
+            commentListRequestDto.addComment(new CommentResponseDto(comment, commentLikes.isLikeCheck(),commentLikeCnt));
+            }
         }
-
-        return new PostShowResponseDto(post, commentListRequestDto, postLikeCnt);
+        PostLikes postLikes = postLikesRepository.findByUserAndPost(user, post).orElse(null);
+        if (postLikes==null) {
+            return new PostShowResponseDto(post, false,commentListRequestDto, postLikeCnt);
+        }
+        return new PostShowResponseDto(post, postLikes.isLikeCheck(),commentListRequestDto, postLikeCnt);
     }
 
     // 포스트 생성
     @Transactional
-    public PostCreateResponseDto createPost(PostRequestDto requestDto, HttpServletRequest request) {
+    public PostCreateResponseDto createPost(String title,String content,int price,String imageUrl, HttpServletRequest request) {
         User user = userUtil.getUserInfo(request);
-        List<String> imageList = awsS3Service.uploadFile(requestDto.getMultipartFiles());
-        Post post = new Post(requestDto.getTitle(),requestDto.getContent(),requestDto.getPrice(), user);
-        post.setImage(imageList.get(0));
-
+        Post post = new Post(title,content,price,imageUrl, user);
         postRepository.save(post); // 자동으로 쿼리가 생성되면서 데이터베이스에 연결되며 저장된다.
 
         return new PostCreateResponseDto(post);

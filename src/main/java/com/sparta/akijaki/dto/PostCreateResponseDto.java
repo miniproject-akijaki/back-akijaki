@@ -2,7 +2,11 @@ package com.sparta.akijaki.dto;
 
 import com.sparta.akijaki.entity.Post;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class PostCreateResponseDto {
@@ -13,8 +17,8 @@ public class PostCreateResponseDto {
     private int price;
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
+    private String imageUrl;
 
-    private String image;
 
     public PostCreateResponseDto(Post post) {
         this.num = post.getId();
@@ -24,6 +28,6 @@ public class PostCreateResponseDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-        this.image = post.getImage();
+        this.imageUrl = post.getImageUrl();
     }
 }
