@@ -23,12 +23,13 @@ public class Post extends Timestamped {
 
     @Column
     private String imageUrl;
+
+    @Column
+    private String video;
     // 내용
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column
-    private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -40,18 +41,18 @@ public class Post extends Timestamped {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // , cascade = CascadeType.REMOVE
     private List<PostLikes> postLikes = new ArrayList<>();
 
-    public Post(String title, String content, int price, String imageUrl, User user) {
+    public Post(String title, String content, String video, String imageUrl, User user) {
         this.title = title;
         this.content = content;
-        this.price = price;
+        this.video = video;
         this.imageUrl = imageUrl;
         this.user = user;
     }
 
-    public void update(String title, String content, int price, String imageUrl) {
+    public void update(String title, String content, String video, String imageUrl) {
         this.title = title;
         this.content = content;
-        this.price = price;
+        this.video = video;
         this.imageUrl = imageUrl;
     }
 }

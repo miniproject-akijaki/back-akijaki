@@ -43,10 +43,11 @@ public class PostController {
     @PostMapping("/post")
     @ApiOperation(value = "게시글 작성")
     public PostCreateResponseDto createPost(@RequestParam("title") String title, @RequestParam("content") String content,
-                                            @RequestParam("price") int price, @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+                                             @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
                                             HttpServletRequest request)  {
         String imageUrl = awsS3Service.uploadFile(multipartFiles).get(0);
-        return postService.createPost(title, content, price, imageUrl, request);
+        String video = awsS3Service.uploadFile(multipartFiles).get(0);
+        return postService.createPost(title, content, video, imageUrl, request);
     }
 
 //    @PostMapping("/post")
@@ -62,10 +63,11 @@ public class PostController {
     @PutMapping("/post/{id}")
     @ApiOperation(value = "게시글 수정")
     public PostUpdateResponseDto updatePost(@PathVariable Long id ,@RequestParam("title") String title, @RequestParam("content") String content,
-                                            @RequestParam("price") int price, @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
+                                             @RequestPart(value = "file",required = false) List<MultipartFile> multipartFiles,
                                             HttpServletRequest request) {
         String imageUrl = awsS3Service.uploadFile(multipartFiles).get(0);
-        return postService.updatePost(id, title, content, price, imageUrl, request);
+        String video = awsS3Service.uploadFile(multipartFiles).get(0);
+        return postService.updatePost(id, title, content, video, imageUrl, request);
     }
 
     // 게시글 삭제

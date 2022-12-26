@@ -10,11 +10,9 @@ import com.sparta.akijaki.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -79,9 +77,9 @@ public class PostService {
 
     // 포스트 생성
     @Transactional
-    public PostCreateResponseDto createPost(String title,String content,int price,String imageUrl, HttpServletRequest request) {
+    public PostCreateResponseDto createPost(String title,String content,String video,String imageUrl, HttpServletRequest request) {
         User user = userUtil.getUserInfo(request);
-        Post post = new Post(title,content,price,imageUrl, user);
+        Post post = new Post(title,content,video,imageUrl, user);
         postRepository.save(post); // 자동으로 쿼리가 생성되면서 데이터베이스에 연결되며 저장된다.
 
         return new PostCreateResponseDto(post);
@@ -89,7 +87,7 @@ public class PostService {
 
     // 포스트 수정
     @Transactional
-    public PostUpdateResponseDto updatePost(Long id, String title, String content, int price, String imageUrl, HttpServletRequest request) {
+    public PostUpdateResponseDto updatePost(Long id, String title, String content, String video, String imageUrl, HttpServletRequest request) {
         Post post = checkPost(id);
         User user = userUtil.getUserInfo(request);
         UserRoleEnum userRoleEnum = user.getRole();
@@ -98,7 +96,7 @@ public class PostService {
         // 게시글 작성자이거나 관리자인 경우
         if(post.getUser().getUsername().equals(user.getUsername()) || userRoleEnum.equals(UserRoleEnum.ADMIN)) {
 //            awsS3Service.deleteFile(post.getImageUrl().replace("https://akijaki-s3-bucket.s3.ap-northeast-2.amazonaws.com/",""));
-            post.update(title, content, price, imageUrl);
+            post.update(title, content, video, imageUrl);
             postRepository.save(post);
         } else {
             throw new IllegalArgumentException("포스트 작성자가 아니라서 수정할 수 없습니다.");

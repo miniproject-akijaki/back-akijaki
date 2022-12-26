@@ -1,6 +1,5 @@
 package com.sparta.akijaki.service;
 
-import com.sparta.akijaki.dto.CompleteResponseDto;
 import com.sparta.akijaki.dto.LikeResponseDto;
 import com.sparta.akijaki.entity.*;
 import com.sparta.akijaki.repository.CommentLikesRepository;
