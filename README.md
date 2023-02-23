@@ -28,5 +28,5 @@
 <img width="800" alt="api3" src="https://blog.kakaocdn.net/dn/EifTa/btrUVbFUujz/8KdMujorfyUhy87XI5i3x1/img.png">
 
 ## 🗺 ERD
-<img width="800" alt="메인페이지2" src="https://www.notion.so/b897d2309b6548aabfe4e00818409b1f?pvs=4#4427baf89b29482cb7df24340666acf0">  
+[ERD](https://www.notion.so/b897d2309b6548aabfe4e00818409b1f?pvs=4#4427baf89b29482cb7df24340666acf0)  
 
